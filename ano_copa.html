@@ -1,0 +1,46 @@
+<meta charset = "UTF=8">
+<script>
+
+    function pulaLinha(){
+        document.write("<br>");
+        }
+
+    function mostra(frase){
+        document.write(frase);
+        pulaLinha();
+        }
+
+    // var anoCopa = 1930;
+    // var anoLimite = parseInt(prompt("Digite a data limite: "));
+
+    // while(anoCopa <= anoLimite){
+    //     mostra("Teve copa em " + anoCopa);
+    //     anoCopa += 4;
+    // }
+
+    // var numero = 20;
+    // while (numero >= 0){
+    //     mostra(numero);
+    //     numero -= 1
+    // }
+
+    var totalDeFamiliares = parseInt(prompt("Digite a quantidade de familiares: "));
+
+    somaIdades = 0;
+    contador = 1
+
+    while (contador <= totalDeFamiliares){
+        var idade = parseInt(prompt("Digite a idade do familiar: "));
+        somaIdades += idade;
+        contador++;
+    }
+
+    mostra("A soma das idades dos " + totalDeFamiliares + " familiares é " + somaIdades);
+
+    mediaIdades = somaIdades / totalDeFamiliares;
+
+    mostra("A média das idades dos " + totalDeFamiliares + " familiares é " + mediaIdades);
+
+    
+
+</script>

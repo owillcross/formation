@@ -1,0 +1,90 @@
+<meta charset = "UTF=8">
+<input/>
+<button>Compare com o meu segredo</button>
+<script>
+    //usada para pular linha
+    function pulaLinha(){
+        document.write("<br>");
+    }
+    //exibe o conteúdo na tela
+    function mostra(frase){
+        document.write(frase);
+        pulaLinha();
+    }
+    //sorteia uma número aleatório de 0 até numeroMaximo
+    function sorteia(numeroMáximo){
+        return Math.round(Math.random() * numeroMáximo);
+    }
+    //dado um número secreto único, verifica se o valor inserido no formulário é igual a ele.
+    function verificaNumeroUnico(){  
+        var chute = document.querySelector("input");
+        chute.focus();   
+        if (chute.value == numeroPensado){
+            mostra("Você acertou!");
+        }else{
+            if (chute.value < numeroPensado){
+                alert("O número chutado é menor do que o número pensado. Tente novamente. Você ainda tem "+ (3 - tentativas) + " tentativas");
+            }else{
+                alert("O número chutado é maior do que o número pensado. Tente novamente. Você ainda tem "+ (3 - tentativas) + " tentativas");
+            }
+        }
+        tentativas++;
+        if (tentativas > 3){
+            mostra("Acabaram suas chances de tentativas");
+        }
+    }
+    //dado um array com uma quantidadeNumerosPensados, verifica se o valor inserido no formulário está dentro do array sorteado.
+    function verificaMaisDeUmSegredo(){  
+        var chute = document.querySelector("input");
+        chute.focus();
+        var achou = false;
+        for (i=0; i < numeroPensado.length; i++){
+            if (chute.value == numeroPensado[i]){
+                achou = true;
+            }
+        }
+        if (achou){
+            mostra("Você acertou!");
+        }else{
+            alert("Você errou! Você tem mais "+ (3 - tentativas) + " tentativas restantes.");
+        }
+        tentativas++;
+        if (tentativas > 3 && achou == false){
+            mostra("Acabaram suas chances de tentativas :(");
+        }
+    }
+// gera um array de tamanho quantidadeDeNumerosPensados com número de 0 até numeroMaximo
+    function sorteiaNumeros(quantidadeDeNumerosPensados, numeroMaximo){
+        var numeroPensado = [];
+        var n = 1
+        while (n <= quantidadeDeNumerosPensados){
+            var numeroAleatorio = sorteia(numeroMaximo);
+            var achou = false;
+            // verifica se o número gerado já consta no array
+            for(var posicao = 0 ; posicao < numeroPensado.length; posicao++){
+                if (numeroPensado[posicao] == numeroAleatorio){
+                    achou = true
+                    break;
+                }
+            }
+            if(achou == false){
+                numeroPensado.push(numeroAleatorio);
+                n++;
+            } 
+        }
+        return numeroPensado;
+    }
+
+    var numeroMaximo = 10; //torna o jogo mais fácil ou mais difícil
+    // var numeroPensado = sorteia(numeroMáximo); // incluir apenas 1 número como segredo
+    var tentativas = 1;
+    var quantidadeDeNumerosPensados = 3 // altera a quantidade de números que vão compor o array do segredo
+    var numeroPensado = sorteiaNumeros(quantidadeDeNumerosPensados, numeroMaximo);
+    console.log(numeroPensado);  
+    var chute = document.querySelector("input");
+    chute.focus();
+    var button = document.querySelector("button");
+    //button.onclick = verificaNumeroUnico; // para verificar um só número
+    button.onclick = verificaMaisDeUmSegredo; // para verificar uma lista (array) de números
+
+</script>
